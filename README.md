@@ -6,3 +6,7 @@ npx create-react-app jsxspa
 npm install --save react-router-dom
 
 npm install --save query-string
+
+cd jsxspa
+
+nvm use
