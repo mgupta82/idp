@@ -16,3 +16,7 @@ nvm use
 npm install express-generator -g
 
 express jsmiddle
+
+npm install --save dotenv
+
+npm install --save express-openid-connect
