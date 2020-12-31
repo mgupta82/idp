@@ -10,3 +10,9 @@ npm install --save query-string
 cd jsxspa
 
 nvm use
+
+## Node based Regular Web App with authentication
+
+npm install express-generator -g
+
+express jsmiddle
