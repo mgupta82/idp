@@ -14,6 +14,11 @@ function Home() {
               Auth0 (Code + PKCE)
             </a>
           </p>
+          <p> 
+            <a href="https://testlab.au.auth0.com/v2/logout?returnTo=http%3A%2F%2Flocalhost%3A3000&client_id=KzJIx1GcWvwL4XMAHuBLvs45icF2gmUg">
+              Logout
+            </a>
+          </p>
         </header>
       </div>
     );
