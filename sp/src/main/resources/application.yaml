@@ -1,0 +1,77 @@
+server:
+  port: 9090
+  servlet:
+    context-path: /sample-sp
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+    org.springframework.security.saml: TRACE
+    org.opensaml.xmlsec: TRACE
+
+spring:
+  thymeleaf:
+    cache: false
+  security:
+    saml2:
+      network:
+        read-timeout: 10000
+        connect-timeout: 5000
+      service-provider:
+        entity-id: spring.security.saml.sp.id
+        alias: boot-sample-sp
+        sign-metadata: true
+        sign-requests: true
+        want-assertions-signed: true
+        single-logout-enabled: true
+        name-ids:
+          - urn:oasis:names:tc:SAML:2.0:nameid-format:persistent
+          - urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress
+          - urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified
+        keys:
+          active:
+            name: sp-signing-key-1
+            private-key: |
+              -----BEGIN RSA PRIVATE KEY-----
+              Proc-Type: 4,ENCRYPTED
+              DEK-Info: AES-128-CBC,184022D7848E9468F03D0AC3F32CB3FF
+
+              MEY/xSBkVBCmcZSoMw4vLWPYqDI4JqeYyfRVawPOjm+VaIG4S44Kz1UViGMv9DW+
+              kTnBnR3wYv09uBi+bZbaYKb6l4U8Mp8RINZokPGzd5gkck2NamHDGM6wX0jCXQU2
+              /9mP3Ukjmd5WJh9EL258suaKLX2fTkIg+w6edIR91uMaE97wBcfJJO09yhS0DMao
+              ml/Uk9SNQck0QdX9bxsNMmEI6VsqzZlRWHI41R2aLDAfWYSzy8mEC1na3ftKD4/4
+              DiIQos/JwLrAvFZ9YIPuPyC+5QQG3gt9nAl696Wf8NLTarfHmbcwCZDu39sYFqoj
+              gZpnDMt+/R+G7LlyiL05hGghOQVJTQYQ7eD7iaEZiPqPvy91vf0xeorUVgHIpq8c
+              E53rqGq4s6H6SegM0QOW3BO0sLAdvDsmur1OANbH+wrF60gOIyJZXbpN2PO7Xtmw
+              ZWXx5X8PwiU8JoAkAxvnhRY/PvG1z0RXfrMy+Jh/x7tM9ljMFNlgdBSqGzZR/ik0
+              Q/YXkNc+z0V1NHDv2s/TcvJ7y1bng8AyEQYN4lU0p4OpFQleDfUi5kV1PToXn+VF
+              pXe19zteVcH4B3dNqzWoQwjOAMP5ekYiOTtCSPz0R3nRme6kDHXxqrqFL52v9x3F
+              kdHKxFg1B6WHnd6wxwaseC0HEGm0+BcEJEOuwFpby+znNlyPq0gxPqGxLynSZQzn
+              PSR0km3DG6XqhD4A4CdM7pkAlnJ03Nt7jGNHwifvp/KeOFAcP8XOIu7rZLyCnqSF
+              PadM8TrcLMpA9I/+CvUq0PB+fum6N6GTb2c/KekpYaKO8mFqNDzV1/ZcmhNeqPln
+              -----END RSA PRIVATE KEY-----
+            passphrase: test1
+            certificate: |
+              -----BEGIN CERTIFICATE-----
+              MIICWTCCAcICCQCWRAab7TO2vDANBgkqhkiG9w0BAQsFADBxMQswCQYDVQQGEwJB
+              VTEMMAoGA1UECAwDVklDMQwwCgYDVQQHDANNZWwxDTALBgNVBAoMBHRlc3QxDTAL
+              BgNVBAsMBHRlc3QxCzAJBgNVBAMMAnNwMRswGQYJKoZIhvcNAQkBFgxzcEB0ZXN0
+              LnRlc3QwHhcNMjEwMTAzMDkyNTE1WhcNMjIwMTAzMDkyNTE1WjBxMQswCQYDVQQG
+              EwJBVTEMMAoGA1UECAwDVklDMQwwCgYDVQQHDANNZWwxDTALBgNVBAoMBHRlc3Qx
+              DTALBgNVBAsMBHRlc3QxCzAJBgNVBAMMAnNwMRswGQYJKoZIhvcNAQkBFgxzcEB0
+              ZXN0LnRlc3QwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMBfs06smrA0pjIQ
+              QqBDCZsXKQg/1Xnvd0/rFoykBi70nCpJ3hmk5WRWIbiQ8GVJHBquDxMxJ7aPaVUs
+              OnrQQvK9MovL9SjYkY8BTMMiKuuvW4Bu6jRkvB9tTQfbxQEWu7lWiOWL2cVtuYa/
+              qQgLnwliFK3Gjje2GtF5cwAOoX73AgMBAAEwDQYJKoZIhvcNAQELBQADgYEAtdEC
+              Kg1f46bGW3Ciolonnh+qqUs4QlfXtbswd6FWxgX/LuRDvMNdnncnOtHnGNuWkDSn
+              P4fqKklMwdCjt/pgcVOTf8W8YBdtSUlMwt5nEHaLhMFQxWk+YdCaxBtDKUDtlbmO
+              neOx02ccPSkpLe8CaQOOAP7iVE3SqQyZ+M4GH+8=
+              -----END CERTIFICATE-----
+        providers:
+          - alias: spring-security-saml-idp
+            metadata: http://localhost:9091/sample-idp/saml/idp/metadata
+            link-text: Spring Security SAML IDP/9091
+            name-id: urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress
+            assertion-consumer-service-index: 0
